@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<title>Hi</title>
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="circle-wrapper">
+	<div class="circle">
+		<div class="inbox" id="bar1">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar2">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar3">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar4">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar5">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar6">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar7">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar8">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar9">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar10">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="inbox" id="bar-black">
+			<div class="above"></div>
+			<div class="below"></div>
+		</div>
+		<div class="white-circle">
+		</div>
+		<div class="mid-circle">
+			<div id="pot">Current Pot</div>
+			<div id="trx">113.99<span> TRX</span></div>
+		</div>
+		<div class="mid-circle" id="w2">
+		</div>
+		<div class="gradient-circle"></div>
+		<div class="in-black-circle" id="b1"></div>
+		<div class="in-black-circle" id="b2"></div>
+		<div class="in-black-circle" id="b3"></div>
+		<div class="photo-wrap" id="pw1">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw2">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw3">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw4">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw5">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw6">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw7">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+		<div class="photo-wrap" id="pw8">
+			<div class="photo-div">
+			</div>
+			<div class="right-line"></div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+In1 = <input type="number" onchange="setval(1,this)" id="p1p" value="10"><br><br>
+In2 = <input type="number" onchange="setval(2,this)" id="p2p" value="10"><br><br>
+In3 = <input type="number" onchange="setval(3,this)" id="p3p" value="10"><br><br>
+In4 = <input type="number" onchange="setval(4,this)" id="p4p" value="10"><br><br>
+In5 = <input type="number" onchange="setval(5,this)" id="p5p" value="10"><br><br>
+In6 = <input type="number" onchange="setval(6,this)" id="p6p" value="10"><br><br>
+In7 = <input type="number" onchange="setval(7,this)" id="p7p" value="10"><br><br>
+In8 = <input type="number" onchange="setval(8,this)" id="p8p" value="10"><br><br>
+<div class="canvas-wrapper">
+	<canvas id="canvas" width="800" height="200" style="position: relative;">
+	    [No canvas]
+	</canvas>
+</div>
+<input id="slider" type="range" min="0" max="800" step="1" value="200" />
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prefixfree/1.0.7/prefixfree.min.js"></script>
+<script src="js/conic-gradient.js"></script>
+<script>
+f = navigator.userAgent.search("Firefox");
+$(function(){
+	setval();
+})
+
+function setval() {
+	//$('style').remove();
+	var x = [0];
+	var b = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+	for (var k = 1; k <= 8; k++)
+	{
+		x.push(Number($("#p"+k+"p").val()));
+	}
+
+	$("#trx").html(b[8] + "<span> TRX</span>")
+
+	b[1] = x[1];
+	setter(1,ptodeg(b[1]));
+	$("#pw1").css('transform', 'translate(0%,-50%) rotate(' + (ptodeg(b[1]/2) -  90) + 'deg)');
+	$("#pw1 .photo-div").css('transform', 'rotate(' + (-(ptodeg(b[1]/2) -  90)) + 'deg)');
+	for (var k = 2; k <= 8; k++)
+	{
+		b[k] = x[k] + b[k-1];
+		setter(k,ptodeg(b[k]));
+		$("#pw" + k).css('transform', 'translate(0%,-50%) rotate(' + (ptodeg(x[k]/2 + b[k-1]) -  90) + 'deg)');
+		$("#pw" + k + " .photo-div").css('transform', 'rotate(' + (-(ptodeg(x[k]/2 + b[k-1]) -  90)) + 'deg)');
+	}
+	
+	// b[8] here
+	var whitep = b[8];
+	$(".gradient-circle").css('opacity', '0');
+	if (f > -1)
+	{
+		// Mozilla code
+		var gradient = new ConicGradient({
+		    stops: '#ff9abb '+b[1]+'%, #f4e391 '+b[2]+'%, #9ce7ff '+b[3]+'%, #a8b6ff '+b[4]+'%, #06beb6 '+b[5]+'%, #eb3349 '+b[6]+'%, #614385 '+b[7]+'%, #56ab2f '+b[8]+'%, #f5f4f3 '+whitep+'%', // required
+		    repeating: false, // Default: false
+		    size: 220 // Default: Math.max(innerWidth, innerHeight)
+		});
+		var back = gradient.dataURL;
+		setTimeout(function(){
+			$(".gradient-circle").css({'background-image': 'url('+back+')','opacity': '1'});
+		},250)
+	} else {
+		setTimeout(function(){
+			$(".gradient-circle").css({'background': 'conic-gradient(#ff9abb '+b[1]+'%, #f4e391 '+b[2]+'%, #9ce7ff '+b[3]+'%, #a8b6ff '+b[4]+'%, #06beb6 '+b[5]+'%, #eb3349 '+b[6]+'%, #614385 '+b[7]+'%, #56ab2f '+b[8]+'%, #f5f4f3 '+whitep+'%)', 'opacity': '1'});
+		},250)
+	}
+
+	for (var k = 1; k <= 8; k++)
+	{
+		if (x[k] == 0)
+		{
+			$("#pw" + k).css('opacity', '0');
+		} else {$("#pw" + k).css('opacity', '1');}
+	}
+
+	$("#trx").html(b[8] + "<span> TRX</span>")
+}
+
+function ptodeg(per)
+{
+	return (per/100)*360;
+}
+
+var maxp = 0;
+
+function setter(id,percent)
+{
+	var body = $('body');
+	switch (id) {
+		case 1 :
+			var l1 = "#FFB49C";
+			var l2 = "#FF91C6";
+			break;
+		case 2 :
+			var l1 = "#FFCC9C";
+			var l2 = "#F0EC8E";
+			break;
+		case 3 :
+			var l1 = "#ADF08E";
+			var l2 = "#9CE7FF";
+			break;
+		case 4 :
+			var l1 = "#F79CFF";
+			var l2 = "#92BDFF";
+			break;
+		case 5 :
+			var l1 = "#06beb6";
+			var l2 = "#48b1bf";
+			break;
+		case 6 :
+			var l1 = "#eb3349";
+			var l2 = "#f45c43";
+			break;
+		case 7 :
+			var l1 = "#614385";
+			var l2 = "#516395";
+			break;
+		case 8 :
+			var l1 = "#56ab2f";
+			var l2 = "#a8e063";
+			break;
+	}
+	if (percent > 180)
+	{
+		body.append("<style>#bar" + id + " .above:before{transform: rotate(" + (360 - percent) + "deg); background: linear-gradient(-"+((360 - percent)/2)+"deg, " + l1 + ", " + l2 + ")} #bar" + id + " .below:before{transform: rotate(" + 0 + "deg); background: linear-gradient(-"+((360 - percent)/2)+"deg, " + l1 + ", " + l2 + ")} </style>");	
+	} else {
+		body.append("<style>#bar" + id + " .above:before{transform: rotate(" + 180 + "deg);} #bar" + id + " .below:before{transform: rotate(" + (180 - percent) + "deg)} </style>");
+	}
+	
+}
+
+
+
+
+</script>
+
+</html>
