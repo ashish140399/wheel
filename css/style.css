@@ -388,3 +388,44 @@ canvas {
 	left: 10%;
 	bottom: 0px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.triangle_pointer {
+	top: -14px;
+	margin: auto;
+	z-index: 150;
+    position: relative;
+    height: 0;
+    width: 0;
+    border-bottom: 14px solid #ff4136;
+    border-right: 14px solid transparent;
+    border-left: 14px solid transparent;
+}
+
+#triangle_pointer_block{
+	height: 220px;
+	width: 220px;
+	position: absolute;
+	animation-timing-function: ease;
+	
+}
+@keyframes pointer_arrow{
+	from{
+		transform: rotate(0deg);
+	}
+	to{
+		transform: rotate();
+	}
+}
